@@ -14,3 +14,14 @@ dev = [
     "mypy>=1.18.2",
     "ruff>=0.14.0",
 ]
+
+[tool.uv]
+required-version = "~=0.8.5"
+
+
+# mypy settings
+[tool.mypy]
+strict = true
+pligins = [
+    'pydantic.mypy'
+]
