@@ -25,3 +25,83 @@ strict = true
 pligins = [
     'pydantic.mypy'
 ]
+
+[tool-ruff]
+src = [
+    'src',
+    'programs-catalog'
+]
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "venv",
+]
+
+# Same as Black
+line-lenght = 79
+indent-width = 4
+
+# Assume Python 3.13
+target-version = "py313"
+
+[tool.ruff.lint]
+select = [
+    'ANN', # Аннотации
+    'E', # Ошибка форматирования
+    "F", # Статический анализ
+    "I", # Сортировка импортов
+    "B", # Поиск багов
+    "UP", # Современный синтаксис
+    "C4", # Улучшение comprehensions
+    "RUF", # Специфичные правила ruff
+    "FAST", # FASTAPI(FAST)
+    "Q", # Единобразие ковычек
+    "AIR", # Блокирующие вызовы в async функциях
+    "W", # Предупреждение форматирования
+    "A", # Конфликт с build-in именами
+    "PL", # Pylint rules (Используй константы)
+    "TRY", # Обработка исключений
+    "PT", # Pytest style
+    "YTT", # Python 3.10+ совместимость
+    "FBT", # Указывать аннотации булевым позиционным аргументам
+    "COM", # Запятые в trailing
+    "ERA", # Закомментированный код
+    "EM", # Развернутое сообщение об ошибках
+    "G", # Правильное логгирование
+    "N", # Именнование
+    "PIE", # Улучшение кода
+    "RET", # Не явный return
+    "SIM", # Избыточная проверка
+    "ARG", # Неиспользуемые аргументы
+    "PTH", # Использование pathlib
+]
+
+ignore = [
+
+]
+
+fixable = ["ALL"]
+unfixable = []
