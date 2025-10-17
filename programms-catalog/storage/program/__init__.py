@@ -1,3 +1,3 @@
-from .crud import (
-    ProgramsStorage as ProgramStorage,
+from storage.program.crud import (
+    ProgramsStorage as ProgramsStorage,
 )
