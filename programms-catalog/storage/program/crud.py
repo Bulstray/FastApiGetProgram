@@ -1,2 +1,3 @@
 class ProgramsStorage:
-    hash_name: str
+    def __init__(self, hash_name: str) -> None:
+        self.hash_name: str = hash_name
