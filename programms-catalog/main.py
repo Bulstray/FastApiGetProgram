@@ -1,7 +1,5 @@
-from fastapi import FastAPI
-
 from app_lifespan import lifespan
-
+from fastapi import FastAPI
 
 app = FastAPI(
     title="Programs",
