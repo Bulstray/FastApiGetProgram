@@ -1,25 +1,9 @@
 from pathlib import Path
-from typing import Annotated
 
-from annotated_types import Len, MaxLen
 from pydantic import BaseModel, field_validator
 
 from schemas.programs.exceptions import UnsupportedFormatFileError
-from schemas.programs.programs_constants import (
-    DESCRIPTION_MAX_LENGTH,
-    NAME_MAX_LENGTH,
-    NAME_MIN_LENGTH,
-)
-
-NameString = Annotated[
-    str,
-    Len(
-        min_length=NAME_MIN_LENGTH,
-        max_length=NAME_MAX_LENGTH,
-    ),
-]
-
-DescriptionString = Annotated[str, MaxLen(DESCRIPTION_MAX_LENGTH)]
+from schemas.programs.programs_constants import DescriptionString, NameString
 
 
 class ProgramBase(BaseModel):
