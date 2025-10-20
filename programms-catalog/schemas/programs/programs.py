@@ -4,8 +4,12 @@ from typing import Annotated
 from annotated_types import Len, MaxLen
 from pydantic import BaseModel, field_validator
 
-NAME_MIN_LENGTH = 3
-NAME_MAX_LENGTH = 50
+from schemas.programs.exceptions import UnsupportedFormatFileError
+from schemas.programs.programs_constants import (
+    DESCRIPTION_MAX_LENGTH,
+    NAME_MAX_LENGTH,
+    NAME_MIN_LENGTH,
+)
 
 NameString = Annotated[
     str,
@@ -14,9 +18,6 @@ NameString = Annotated[
         max_length=NAME_MAX_LENGTH,
     ),
 ]
-
-
-DESCRIPTION_MAX_LENGTH = 200
 
 DescriptionString = Annotated[str, MaxLen(DESCRIPTION_MAX_LENGTH)]
 
@@ -28,14 +29,11 @@ class ProgramBase(BaseModel):
     file_path: Path
 
     @field_validator("file_path")
-    def validate_file_path(cls, v: Path) -> Path:
+    def validate_file_path(self, v: Path) -> Path:
         archive_extensions: set[str] = {".zip", ".7z", ".rar"}
 
         if v.suffix.lower() not in archive_extensions:
-            raise ValueError(
-                f"Неподдерживаемый формат архива: {v.suffix}. "
-                f"Поддерживаемые форматы: {', '.join(archive_extensions)}",
-            )
+            raise UnsupportedFormatFileError
         return v
 
 
