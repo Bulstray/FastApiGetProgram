@@ -4,6 +4,7 @@ import shutil
 from fastapi import UploadFile
 from pathlib import Path
 
+from pydantic import BaseModel
 from redis import Redis
 
 from schemas.programs.programs import ProgramCreate, Program
@@ -21,16 +22,18 @@ redis = Redis(
 UPLOAD_DIR = Path("uploads")
 
 
-class ProgramsStorage:
+class ProgramsStorage(BaseModel):
+    hash_name: str
+
     def __save_program(self, program: ProgramCreate, file: UploadFile) -> Program:
 
-        file_path = UPLOAD_DIR / f"program.name.zip"
+        file_path = UPLOAD_DIR / f"{program.name}.zip"
 
         with open(file_path, "wb") as buffer:
             shutil.copyfileobj(file.file, buffer)
 
         redis.hset(
-            name=settings.redis.collection.program_hash,
+            name=self.hash_name,
             key=program.name,
             value=program.model_dump_json(),
         )
@@ -38,7 +41,7 @@ class ProgramsStorage:
 
     def __exists(self, name: str) -> bool:
         return redis.hexists(
-            name=settings.redis.collection.program_hash,
+            name=self.hash_name,
             key=name,
         )
 
@@ -61,5 +64,11 @@ class ProgramsStorage:
             )
         ]
 
+    def get_by_name(self, name: str) -> Program | None:
+        if answer := redis.hget(name=self.hash_name, key=name):
+            return Program.model_validate_json(answer)
 
-storage = ProgramsStorage()
+        return None
+
+
+storage = ProgramsStorage(hash_name=settings.redis.collection.program_hash)
