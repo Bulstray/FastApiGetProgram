@@ -9,8 +9,8 @@ from storage.program import ProgramsStorage
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncIterator[None]:
 
-    # app.state.programs_storage = ProgramsStorage(
-    #     hash_name=settings.redis.collection.program_hash,
-    # )
+    app.state.programs_storage = ProgramsStorage(
+        hash_name=settings.redis.collection.program_hash,
+    )
 
     yield
