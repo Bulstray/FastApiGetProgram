@@ -20,5 +20,8 @@ class ProgramCreate(ProgramBase):
     """Модель для создания программы"""
 
 
-class ProgramUpdate(ProgramBase):
+class ProgramUpdate(BaseModel):
     """Модель для обновления информации"""
+
+    name: NameString | None = None
+    description: DescriptionString | None = None

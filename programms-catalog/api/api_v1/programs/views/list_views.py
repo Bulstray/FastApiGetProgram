@@ -4,7 +4,7 @@ from fastapi import APIRouter, Form, UploadFile, status
 from schemas.programs.programs import Program, ProgramCreate, ProgramRead
 from storage.program.crud import storage
 
-router = APIRouter(prefix="/programs", tags=["Programs"])
+router = APIRouter()
 
 
 @router.get("/", response_model=list[ProgramRead])
@@ -12,7 +12,7 @@ def read_program_list() -> list[Program]:
     return storage.get()
 
 
-@router.post("/", status_code=status.HTTP_201_CREATED, response_model=Program)
+@router.post("/", status_code=status.HTTP_201_CREATED)
 def add_program(
     file: UploadFile,
     name: Annotated[str, Form(...)],

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Home - Movies
+{% endblock %}
+
+{% block main %}
+  <h1>Каталог программ KazanGeophysics</h1>
+
+  <h3 class="mt-3">Особенности</h3>
+  <ul class="list-group">
+    {% for feature in features %}
+      <li class="list-group-item">{{ feature }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
+
+{% block footer %}
+  <div>
+    <small>The service is still under development.</small>
+  </div>
+  {{ super() }}
+{% endblock %}
