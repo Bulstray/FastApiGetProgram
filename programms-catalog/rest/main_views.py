@@ -12,10 +12,9 @@ def read_docs(request: Request) -> HTMLResponse:
     context: dict[str, Any] = {}
 
     features = [
-        "Add new program",
-        "Load program",
-        "Update program",
-        "Delete program",
+        "Возможность скачивания нужных программ",
+        "Постоянная поддержка ПО",
+        "Обновление информации на сайте",
     ]
 
     context.update(
