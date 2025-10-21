@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+
 from schemas.programs.programs_constants import DescriptionString, NameString
 
 
