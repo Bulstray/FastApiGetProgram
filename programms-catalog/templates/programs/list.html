@@ -23,7 +23,7 @@
                     <tr>
                         <td><code>{{ program.name }}</code></td>
                         <td>{{ program.description }}</td>
-                        <td><a href="#" class="btn btn-primary">Download</a>
+                        <td><a href="{{ url_for('program:get', name=program.name) }}" class="btn btn-primary">Download</a>
                         </td>
                     </tr>
                 {% endfor %}
