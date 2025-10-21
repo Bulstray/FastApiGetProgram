@@ -1,14 +1,12 @@
-from typing import Annotated
+from typing import Annotated, cast
 
-from fastapi import Depends, Request, status, HTTPException
-
-from storage.program.crud import ProgramsStorage
-
+from fastapi import Depends, HTTPException, Request, status
 from schemas.programs.programs import Program
+from storage.program.crud import ProgramsStorage
 
 
 def get_programs_storage(request: Request) -> ProgramsStorage:
-    return request.app.state.programs_storage
+    return cast(ProgramsStorage, request.app.state.programs_storage)
 
 
 GetProgramsStorage = Annotated[
