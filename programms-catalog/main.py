@@ -1,9 +1,7 @@
 import uvicorn
-
+from api.api_v1.programs.views.list_views import router
 from app_lifespan import lifespan
 from fastapi import FastAPI
-
-from api.api_v1.programs.views.list_views import router
 
 app = FastAPI(
     title="Programs",
