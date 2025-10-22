@@ -1,11 +1,13 @@
 from typing import Any
 
 from dependensies.programs import GetProgramsStorage
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, Depends
 from fastapi.responses import HTMLResponse, FileResponse
 from templating.jinja_template import templates
 from dependensies.programs import ProgramByName
 from pathlib import Path
+
+from dependensies.auth import validate_basic_auth
 
 router = APIRouter()
 
@@ -27,9 +29,12 @@ def list_view(
     )
 
 
-@router.get("/{name}/", name="program:get")
+@router.get(
+    "/{name}/",
+    name="program:get",
+    dependencies=[Depends(validate_basic_auth)],
+)
 def get_program(
-    request: Request,
     program: ProgramByName,
 ) -> FileResponse:
     return FileResponse(

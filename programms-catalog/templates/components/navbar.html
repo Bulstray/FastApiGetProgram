@@ -1,40 +1,29 @@
 {% set navigation = [
     ('home', 'Home'),
-    ('programs:list', 'Programs')
+    ('programs:list','Programs'),
 ] %}
 
-<nav class="navbar navbar-expand bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">KazanGeophysics</a>
-    <button class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse"
-         id="navbarNav">
-      <ul class="navbar-nav">
-        {% for name, title in navigation %}
-          {% set url = url_for(name) %}
-          <li class="nav-item">
-          <a
-            {% if url.path == request.url.path %}
-              class="nav-link active fw-bold"
-              aria-current="page"
 
-            {% else %}
-              class="nav-link"
-            {% endif %}
-              href='{{ url }}'>
-            {{ title }}
-          </a>
-        {% endfor %}
-        </li>
-      </ul>
+<nav class="navbar navbar-expand-lg navbar-light nav-blur fixed-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold"
+           href="#"
+           style="background: linear-gradient(135deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+            <i class="bi bi-cpu"></i> IT-KGF
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                {% for name, title in navigation %}
+                    {% set url = url_for(name) %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for(name) }}">{{ title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
     </div>
-  </div>
 </nav>

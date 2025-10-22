@@ -1,23 +1,160 @@
 {% extends 'base.html' %}
 
+{% block head %}
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 0;
+        }
+
+        .feature-card {
+            border: none;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .status-section {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border-radius: 15px;
+        }
+
+        .development-badge {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .footer {
+            background: #2c3e50;
+            color: white;
+        }
+
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .nav-blur {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+{% endblock %}
+
 {% block title %}
-Home - Movies
+    Home - IT-KGF
 {% endblock %}
 
 {% block main %}
-<h2 class="mt-4">Каталог программного обеспечения</h2>
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h1 class="display-4 fw-bold mb-4">Каталог программного обеспечения</h1>
+                    <p class="lead mb-4">Комплексные решения для оснащения вашего бизнеса современным программным
+                        обеспечением</p>
+                    <div class="d-flex gap-3 justify-content-center flex-wrap">
+                        <a class="btn btn-light btn-lg px-4" href="{{ url_for('programs:list') }}">
+                            <i class="bi bi-rocket-takeoff"></i> Начать работу
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<ul class="list-group mt-4">
-  {% for feature in features %}
-  <li class="list-group-item">{{ feature }}</li>
-  {% endfor %}
-</ul>
+    <section id="features" class="py-5" style="background: #f8f9fa;">
+        <div class="container py-5">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card feature-card shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon">
+                                <i class="bi bi-gear-fill"></i>
+                            </div>
+                            <h4 class="card-title fw-bold mb-3">Оснащение нужных программ</h4>
+                            <p class="card-text text-muted">
+                                Подберем оптимальное программное обеспечение
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card feature-card shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon">
+                                <i class="bi bi-headset"></i>
+                            </div>
+                            <h4 class="card-title fw-bold mb-3">Постоянная поддержка ПО</h4>
+                            <p class="card-text text-muted">
+                                Техническая поддержка, обновления и консультации от наших специалистов
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card feature-card shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon">
+                                <i class="bi bi-arrow-repeat"></i>
+                            </div>
+                            <h4 class="card-title fw-bold mb-3">Обновление информации</h4>
+                            <p class="card-text text-muted">
+                                Актуальная база программных продуктов с регулярным пополнением и обновлениями
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}
 
 {% block footer %}
-<div>
-  <small>Данный сервис находится в стадии активной разработки.</small>
-  <small>Мы постоянно работаем над добавлением новых функций и улучшением существующих возможностей.</small>
-</div>
-{{ super() }}
+    <div>
+        <small>Данный сервис находится в стадии активной разработки.</small>
+        <small>Мы постоянно работаем над добавлением новых функций и улучшением существующих возможностей.</small>
+    </div>
+    {{ super() }}
 {% endblock %}
