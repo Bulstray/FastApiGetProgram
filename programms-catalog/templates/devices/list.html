@@ -1,0 +1,331 @@
+{% extends 'base.html' %}
+
+{% set description_device = [
+    'Высокая точность измерений',
+    'Современные технологии',
+    'Полная документация'
+] %}
+
+
+{% block head %}
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --accent-color: #6366f1;
+            --dark-bg: #0f172a;
+            --card-bg: #ffffff;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #f8fafc;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 1rem 0;
+        }
+
+        .hero-section {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 100px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" opacity="0.05"><path d="M200,200 Q400,100 600,300 T800,200" stroke="white" fill="none" stroke-width="2"/><path d="M100,500 Q300,400 500,600 T900,500" stroke="white" fill="none" stroke-width="2"/><circle cx="300" cy="300" r="50" fill="white"/><circle cx="700" cy="400" r="30" fill="white"/></svg>');
+        }
+
+        .hero-stats {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-top: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .section-card {
+            border: none;
+            border-radius: 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            background: var(--card-bg);
+            position: relative;
+        }
+
+        .section-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--secondary-gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .section-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .section-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .equipment-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .card-image {
+            width: 200px;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .section-card:hover .card-image {
+            transform: scale(1.05);
+        }
+
+        .btn-modern {
+            background: var(--primary-gradient);
+            border: none;
+            color: white;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-modern::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-modern:hover::before {
+            left: 100%;
+        }
+
+        .btn-modern:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .breadcrumb-nav {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.2rem 1.5rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .hero-section h1, .hero-section h2, .hero-section h3 {
+            color: white;
+        }
+
+        .text-gradient {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .feature-badge {
+            background: var(--secondary-gradient);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .nav-pills .nav-link {
+            border-radius: 50px;
+            padding: 10px 20px;
+            margin: 0 5px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-pills .nav-link.active {
+            background: var(--primary-gradient);
+        }
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .shape {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape-1 {
+            width: 80px;
+            height: 80px;
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .shape-2 {
+            width: 60px;
+            height: 60px;
+            top: 60%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .shape-3 {
+            width: 40px;
+            height: 40px;
+            bottom: 20%;
+            left: 15%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+    </style>
+{% endblock %}
+
+{% block title %}
+    Devices
+{% endblock %}
+
+{% block main %}
+    <section class="hero-section">
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+        <div class="container position-relative">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <span class="feature-badge">{{ span }}</span>
+                    <h1 class="display-4 fw-bold mb-4">{{ title }}</h1>
+                    <p class="lead mb-4 fs-5">{{ description }}</p>
+
+                    <div class="d-flex flex-wrap gap-3 mb-4">
+
+                        {% for device in description_device %}
+                            <div class="d-flex align-items-center text-white">
+                                <i class="bi bi-check-circle-fill me-2 fs-5"></i>
+                                <span>{{ device }}</span>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+
+                    <div class="hero-stats">
+                        <div class="row text-center">
+                            <div class="col-4">
+                                <div class="stat-number">{{ devices|length }}</div>
+                                <div class="stat-label">Модели приборов</div>
+                            </div>
+                            <div class="col-4">
+                                <div class="stat-number">15+</div>
+                                <div class="stat-label">Лет на рынке</div>
+                            </div>
+                            <div class="col-4">
+                                <div class="stat-number">100%</div>
+                                <div class="stat-label">Гарантия качества</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-12 text-center">
+                    <h2 class="display-5 fw-bold mb-3">Современное оборудование</h2>
+                    <p class="lead text-muted fs-5">Подборка профессиональных приборов для сейсмических исследований</p>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                {% for device in devices %}
+                <!-- Приборы остаются такими же как в предыдущем варианте -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="section-card equipment-card h-100 p-4 text-center">
+                        <img src="C:\Users\UserKGF2\Desktop\Файлы CG-5\L5OiGC25Bp9EaqN1KVIM.jpg"  class="card-image"
+                             alt="{{ device.name }}">
+                        <h4>{{ device.name }}</h4>
+                        <p class="mb-3">{{ device.description }}</p>
+                        <a href="#" class="btn btn-modern">Документация</a>
+                    </div>
+                </div>
+
+                {% endfor %}
+
+                <!-- Остальные приборы... -->
+            </div>
+        </div>
+    </section>
+{% endblock %}

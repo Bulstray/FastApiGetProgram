@@ -1,82 +1,115 @@
 {% extends 'base.html' %}
 
+{% set program_section = [
+    ("bi bi-file-earmark-binary fs-1",'Обработка данных', 'Утилиты для обработки геофизических данных и преобразования форматов'),
+    ("bi bi-graph-up fs-1", 'Анализ и визуализация', 'Инструменты для анализа данных и построения графиков'),
+    ("bi bi-tools fs-1", 'Сервисные утилиты', 'Вспомогательные программы для настройки оборудования')
+] %}
+
+{% set geophys_method = [
+    ('bi bi-magnet fs-1', 'Магнитометры', 'Документация к магнитометрам и сопутствующему оборудованию', 'mag'),
+    ('bi bi-soundwave fs-1', 'Сейсморазведка', 'Документация к сейсмическим станциям и вибрационным источникам', 'seis'),
+    ('bi bi-speedometer fs-1', 'Гравиразведка', 'Документация к гравиметрам и гравитационным системам', 'grav'),
+    ('bi bi-lightning-charge fs-1', 'Электроразведка', 'Документация к электроразведочным станциям и электродам', 'electro'),
+    ('bi bi-thermometer-half fs-1', 'Термометрия', 'Документация к термометрам и тепловым сканерам', 'term')
+
+] %}
+
+{% set advantages = [
+    ('bi bi-cloud-arrow-down text-white fs-4', 'Простое скачивание', 'Быстрый доступ ко всем программам KGF (только для сотрудников)'),
+    ('bi bi-file-text text-white fs-4', 'Полная документация', 'Инструкции и руководства к оборудованию'),
+    ('bi bi-shield-check text-white fs-4', 'Проверенные файлы', 'Все программы проверены и используются в работе'),
+    ('bi bi-arrow-clockwise text-white fs-4', 'Регулярные обновления', 'База постоянно пополняется новыми материалами')
+] %}
+
 {% block head %}
     <style>
-        .hero-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 100px 0;
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
         }
 
-        .feature-card {
-            border: none;
-            border-radius: 15px;
-            transition: all 0.3s ease;
-            height: 100%;
+        .hero-section {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 100px 0;
             position: relative;
             overflow: hidden;
         }
 
-        .feature-card::before {
+        .hero-section::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" opacity="0.1"><circle cx="200" cy="200" r="50" fill="white"/><circle cx="700" cy="300" r="80" fill="white"/><circle cx="300" cy="700" r="60" fill="white"/><circle cx="800" cy="600" r="40" fill="white"/></svg>');
         }
 
-        .feature-card:hover {
-            transform: translateY(-10px);
+        .section-card {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
 
-        .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .status-section {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        .programs-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            border-radius: 15px;
         }
 
-        .development-badge {
+        .equipment-card {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+
+        .card-icon {
+            width: 80px;
+            height: 80px;
             background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
         }
 
-        .footer {
-            background: #2c3e50;
+        .btn-modern {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
             color: white;
-        }
-
-        .pulse-animation {
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        .nav-blur {
-            background: rgba(255, 255, 255, 0.95);
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
             backdrop-filter: blur(10px);
         }
+
+        .btn-modern:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-gradient);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
     </style>
 {% endblock %}
 
@@ -86,75 +119,109 @@
 
 {% block main %}
     <section class="hero-section">
-        <div class="container">
+        <div class="container position-relative">
             <div class="row align-items-center">
-                <div class="col-lg-8 mx-auto text-center">
-                    <h1 class="display-4 fw-bold mb-4">Каталог программного обеспечения</h1>
-                    <p class="lead mb-4">Комплексные решения для оснащения вашего бизнеса современным программным
-                        обеспечением</p>
-                    <div class="d-flex gap-3 justify-content-center flex-wrap">
-                        <a class="btn btn-light btn-lg px-4" href="{{ url_for('programs:list') }}">
-                            <i class="bi bi-rocket-takeoff"></i> Начать работу
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-4">IT-KGF Ресурс</h1>
+                    <p class="lead mb-4">Централизованное хранилище программного обеспечения и документации к
+                        оборудованию для научных исследований и геофизических работ</p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="{{ url_for('programs:list') }}" class="btn btn-modern">
+                            <i class="bi bi-download me-2"></i>Программы
+                        </a>
+                        <a href="#equipment" class="btn btn-modern">
+                            <i class="bi bi-tools me-2"></i>Оборудование
                         </a>
                     </div>
                 </div>
+                <div class="col-lg-6 text-center">
+                    <div class="hero-image mt-5 mt-lg-0">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDUwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHg9IjUwIiB5PSI1MCIgd2lkdGg9IjQwMCIgaGVpZ2h0PSIzMDAiIGZpbGw9InJnYmEoMjU1LCAyNTUsIDI1NSwgMC4xKSIgcng9IjIwIiBzdHJva2U9InJnYmEoMjU1LCAyNTUsIDI1NSwgMC4zKSIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxjaXJjbGUgY3g9IjE1MCIgY3k9IjE1MCIgcj0iNDAiIGZpbGw9IiM0Y2M5ZjAiIG9wYWNpdHk9IjAuOCIvPgo8Y2lyY2xlIGN4PSIzNTAiIGN5PSIyMDAiIHI9IjYwIiBmaWxsPSIjNDM2MWVlIiBvcGFjaXR5PSIwLjciLz4KPHBhdGggZD0iTTEwMCAyNTBDMTUwIDIwMCAyMDAgMzAwIDI1MCAyNTBDMzAwIDIwMCAzNTAgMzAwIDQwMCAyNTBDNDUwIDIwMCA0NzUgMzAwIDQ3NSAyNTAiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWRhc2hhcnJheT0iNSw1Ii8+CjxyZWN0IHg9IjE1MCIgeT0iNzAiIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAiIGZpbGw9IndoaXRlIiByeD0iMTAiLz4KPHJlY3QgeD0iMTUwIiB5PSIxMTAiIHdpZHRoPSIyNTAiIGhlaWdodD0iMjAiIGZpbGw9IndoaXRlIiByeD0iMTAiIG9wYWNpdHk9IjAuOCIvPgo8cmVjdCB4PSIxNTAiIHk9IjE1MCIgd2lkdGg9IjE1MCIgaGVpZ2h0PSIyMCIgZmlsbD0id2hpdGUiIHJ4PSIxMCIgb3BhY2l0eT0iMC42Ii8+Cjwvc3ZnPgo="
+                             alt="IT Resources" class="img-fluid">
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="features" class="py-5" style="background: #f8f9fa;">
-        <div class="container py-5">
+
+    <section id="programs" class="py-5">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-12 text-center">
+                    <h2 class="display-5 fw-bold mb-3">Программное обеспечение</h2>
+                    <p class="lead text-muted">Библиотека полезных программ и утилит для обработки данных</p>
+                </div>
+            </div>
+
             <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="card feature-card shadow-sm">
-                        <div class="card-body text-center p-4">
-                            <div class="feature-icon">
-                                <i class="bi bi-gear-fill"></i>
-                            </div>
-                            <h4 class="card-title fw-bold mb-3">Оснащение нужных программ</h4>
-                            <p class="card-text text-muted">
-                                Подберем оптимальное программное обеспечение
-                            </p>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col-md-4">
-                    <div class="card feature-card shadow-sm">
-                        <div class="card-body text-center p-4">
-                            <div class="feature-icon">
-                                <i class="bi bi-headset"></i>
+                {% for icon, title, description in program_section %}
+                    <div class="col-md-4">
+                        <div class="section-card programs-card h-100 p-4 text-center">
+                            <div class="card-icon mx-auto">
+                                <i class="{{ icon }}"></i>
                             </div>
-                            <h4 class="card-title fw-bold mb-3">Постоянная поддержка ПО</h4>
-                            <p class="card-text text-muted">
-                                Техническая поддержка, обновления и консультации от наших специалистов
-                            </p>
+                            <h4>{{ title }}</h4>
+                            <p class="mb-4">{{ description }}</p>
+                            <a href="{{ url_for('programs:list') }}"
+                               class="btn btn-modern">Перейти к программам</a>
                         </div>
                     </div>
-                </div>
+                {% endfor %}
+            </div>
+    </section>
 
-                <div class="col-md-4">
-                    <div class="card feature-card shadow-sm">
-                        <div class="card-body text-center p-4">
-                            <div class="feature-icon">
-                                <i class="bi bi-arrow-repeat"></i>
+    <section id="equipment" class="py-5 bg-light">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-12 text-center">
+                    <h2 class="display-5 fw-bold mb-3">Оборудование</h2>
+                    <p class="lead text-muted">Документация и инструкции к используемому оборудованию</p>
+                </div>
+            </div>
+
+            <div class="row g-4 justify-content-center">
+                {% for icon, title, description, type_device in geophys_method %}
+                    <div class="col-md-6 col-lg-4">
+                        <div class="section-card equipment-card h-100 p-4 text-center">
+                            <div class="card-icon mx-auto">
+                                <i class="{{ icon }}"></i>
                             </div>
-                            <h4 class="card-title fw-bold mb-3">Обновление информации</h4>
-                            <p class="card-text text-muted">
-                                Актуальная база программных продуктов с регулярным пополнением и обновлениями
-                            </p>
+                            <h4>{{ title }}</h4>
+                            <p class="mb-4">{{ description }}</p>
+                            <a href="{{ url_for('devices:list', type_device=type_device) }}" class="btn btn-modern">Смотреть оборудование</a>
                         </div>
                     </div>
-                </div>
+                {% endfor %}
+
             </div>
         </div>
     </section>
-{% endblock %}
 
-{% block footer %}
-    <div>
-        <small>Данный сервис находится в стадии активной разработки.</small>
-        <small>Мы постоянно работаем над добавлением новых функций и улучшением существующих возможностей.</small>
-    </div>
-    {{ super() }}
+
+    <section id="about" class="py-5">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-12 text-center">
+                    <h2 class="display-5 fw-bold mb-3">Почему наш ресурс полезен</h2>
+                </div>
+            </div>
+
+            <div class="row g-4">
+
+                {% for icon, title, description in advantages %}
+                    <div class="col-md-3 text-center">
+                        <div class="feature-icon mx-auto">
+                            <i class="{{ icon }}"></i>
+                        </div>
+                        <h5>{{ title }}</h5>
+                        <p class="text-muted">{{ description }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+
 {% endblock %}

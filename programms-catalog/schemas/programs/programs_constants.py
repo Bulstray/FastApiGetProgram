@@ -6,7 +6,7 @@ from annotated_types import Len, MaxLen
 NAME_MIN_LENGTH = 3
 NAME_MAX_LENGTH = 50
 
-DESCRIPTION_MAX_LENGTH = 200
+DESCRIPTION_MAX_LENGTH = 500
 
 
 # String types with length constraints for the schema

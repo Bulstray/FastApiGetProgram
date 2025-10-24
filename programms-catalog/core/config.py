@@ -11,6 +11,7 @@ class RedisDatabaseConfig(BaseModel):
     tokens: int = 0
     users: int = 2
     programs: int = 3
+    devices: int = 4
 
 
 class RedisConnectionConfig(BaseModel):
@@ -21,6 +22,7 @@ class RedisConnectionConfig(BaseModel):
 class RedisCollectionConfig(BaseModel):
     tokens_set: str = "tokens"
     program_hash: str = "program"
+    device_hash: str = "device"
 
 
 class RedisConfig(BaseModel):

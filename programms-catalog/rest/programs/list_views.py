@@ -1,13 +1,11 @@
+from pathlib import Path
 from typing import Any
 
-from dependensies.programs import GetProgramsStorage
-from fastapi import APIRouter, Request, Depends
-from fastapi.responses import HTMLResponse, FileResponse
-from templating.jinja_template import templates
-from dependensies.programs import ProgramByName
-from pathlib import Path
-
 from dependensies.auth import validate_basic_auth
+from dependensies.programs import GetProgramsStorage, ProgramByName
+from fastapi import APIRouter, Depends, Request
+from fastapi.responses import FileResponse, HTMLResponse
+from templating.jinja_template import templates
 
 router = APIRouter()
 

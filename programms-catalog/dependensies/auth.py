@@ -1,15 +1,10 @@
-from fastapi.security import HTTPBasic, HTTPBasicCredentials
-
-from fastapi import Request, Depends, HTTPException, status
 from typing import Annotated
 
+from fastapi import Depends, HTTPException, Request, status
+from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from service.auth.redis_users_helper import redis_users
-from templating.jinja_template import templates
 
 from dependensies.programs import GetProgramsStorage
-
-from typing import Any
-
 
 user_basic_auth = HTTPBasic(
     scheme_name="Basic Auth",
@@ -27,7 +22,7 @@ def validate_basic_auth(
         username=credentials.username,
         password=credentials.password,
     ):
-        return None
+        return
 
     raise HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,

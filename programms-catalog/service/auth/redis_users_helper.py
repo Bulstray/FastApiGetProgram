@@ -1,8 +1,7 @@
-from .users_helper import AbstractUserHelper
-
+from core.config import settings
 from redis import Redis
 
-from core.config import settings
+from .users_helper import AbstractUserHelper
 
 
 class RedisUsersHelper(AbstractUserHelper):
