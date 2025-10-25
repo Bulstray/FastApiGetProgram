@@ -9,8 +9,8 @@ class DeviceBase(BaseModel):
     type_device: TypeDeviceString
     name: NameString
     description: DescriptionString
-    picture: Path
-    instruction: Path
+    picture: str
+    instruction: str
 
 
 class DeviceRead(DeviceBase):
@@ -34,5 +34,5 @@ class DevicePartialUpdate(BaseModel):
 
     name: NameString | None = None
     description: DescriptionString | None = None
-    picture: Path | None = None
-    instruction: Path | None = None
+    picture: str | None = None
+    instruction: str | None = None

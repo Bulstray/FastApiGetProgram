@@ -70,8 +70,8 @@ class DeviceStorage(BaseModel):
         self.__load_program(file_path=path_instruction, file=instruction)
 
         device = Device(
-            picture=path_picture,
-            instruction=path_instruction,
+            picture=picture.filename,
+            instruction=picture.filename,
             **device.model_dump(),
         )
 
